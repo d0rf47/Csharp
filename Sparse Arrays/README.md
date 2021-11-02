@@ -1,0 +1,1 @@
+![image](https://hackerrank-challenge-pdfs.s3.amazonaws.com/13724-sparse-arrays-English?AWSAccessKeyId=AKIAR6O7GJNX5DNFO3PV&Expires=1635890671&Signature=jvLQabVdDaCGSu0K3pHUwyXB9DU%3D&response-content-disposition=inline%3B%20filename%3Dsparse-arrays-English.pdf&response-content-type=application%2Fpdf)
