@@ -25,5 +25,6 @@ rotations.
 5 1 2 3 4
 ```
 Explanation
-When we perform left rotations, the array undergoes the following sequence of changes:
+When we perform left rotations, the array undergoes the following sequence of changes: ![image](https://user-images.githubusercontent.com/48887571/139948811-1e4c144a-6435-4558-b31e-ccf1a52c54c2.png)
+
 Thus, we print the array's final state as a single line of space-separated values, which is 5 1 2 3 4 .
