@@ -26,7 +26,7 @@ namespace ArraySearch
         /**
         *   Used to reduce runtime of searching
         *   can only be used on SORTED datasets
-        *
+        *   
         */
         public static int? RecursiveBinarySearch(int[] input, int n)
         {
@@ -48,7 +48,7 @@ namespace ArraySearch
         /**
         *   Logarighmic runtime O(logn)
         */
-        public static bool IterativeBinarySearch(long[] input, long n)
+        public static bool IterativeBinarySearch(int[] input, long n)
         {
             long min = 0;
             long max = input.Length - 1;
@@ -67,5 +67,37 @@ namespace ArraySearch
 
             return false;
         }
+
+        /**
+        *   diff implementation
+        *   slower runtime
+        *   O(n)
+        */
+        public static bool IterativeBinarySearch2(int[] input, int n)
+        {
+            if (input.Length == 1)
+            {
+                if (input[0] == n)
+                    return true;
+                return false;
+            };
+
+            int index;
+            while (input.Length > 2)
+            {
+                index = input.Length / 2;
+                
+                if (input[index] > n)                
+                    input = input[0..index];                                 
+                else                
+                    input = input[index..];                                                 
+            }
+
+            if (input[0] == n || (input.Length == 2 && input[1] == n))
+                return true;
+            return false;
+        }
     }
+
+    
 }
