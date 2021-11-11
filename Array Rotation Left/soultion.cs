@@ -10,7 +10,9 @@ namespace First_Demo_ConsoleApp
 
     class Program
     {
-
+        /**
+        * Better performance than rotation in place        
+        */
         public static List<int> rotateLeft(int d, List<int> arr)
         {
             List<int> tmp = new List<int>(arr);
