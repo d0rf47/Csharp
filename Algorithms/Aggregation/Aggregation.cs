@@ -79,5 +79,23 @@ namespace Algorithms
                 arr[size - 1] = temp;
             }
         }
+
+        /**
+        *   Checks an Array for duplicate Values
+        *   returns boolean value
+        *   O(n) runtime
+        */
+        public static bool ContainsDuplicate(int[] nums)
+        {
+            HashSet<int> singles = new HashSet<int>();
+            for(int i = 0; i < nums.Length;i++)
+            {
+                if (singles.Contains(nums[i]))
+                    return true;
+                singles.Add(nums[i]);
+                
+            }
+            return false;
+        }
     }
 }
