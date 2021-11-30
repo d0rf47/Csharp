@@ -2,13 +2,13 @@ using System;
 
 namespace DoublyLinkedList
 {
-    internal class Node
+    internal class Node<T>
     {
-        internal int data;
-        internal Node next;
-        internal Node prev;
+        internal T data;
+        internal Node<T> next;
+        internal Node<T> prev;
 
-        public Node(int d)
+        public Node(T d)
         {
             data = d;
             next = null;
