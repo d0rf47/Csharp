@@ -1,11 +1,16 @@
 using System;
-
+using System.Collections;
 namespace DoublyLinkedList
 {
-    class DList<T>
+    /**
+    * Custom Doubly Linked List Templated Class
+    * With customer iterator implemented via IEnumerable
+    */
+    class DList<T> :IEnumerable
     {
         Node<T> head;
-
+        Node<T> current;
+        int size = 0;
 
         public void PushFront(T data)
         {
@@ -20,6 +25,8 @@ namespace DoublyLinkedList
                 this.head.prev = newNode;
             //set new node to head
             this.head = newNode;
+
+            this.size++;
         }
 
         public void PushBack(T data)
@@ -37,7 +44,9 @@ namespace DoublyLinkedList
             //point last node to new node
             tail.next = newNode;
             //point new node back to last node
-            newNode.prev = tail;            
+            newNode.prev = tail;        
+            
+            this.size++;    
         }
 
         Node<T> GetTail()
@@ -63,12 +72,14 @@ namespace DoublyLinkedList
             //point new prev to node
             newNode.prev = node;      
             if(newNode.next != null)      
-                newNode.next.prev = newNode;                            
+                newNode.next.prev = newNode;     
+
+            this.size++;                       
         }
 
         public Node<T> GetHead()
         {
-            if(this.head == null)
+            if(this.IsEmpty())
                 throw new NullReferenceException("This List is currently Empty!");
             return this.head;
         }
@@ -85,9 +96,23 @@ namespace DoublyLinkedList
             return null;
         }
 
+        public void RemoveFirst()
+        {
+            if(this.IsEmpty())
+                throw new NullReferenceException("This List is currently Empty!");
+            this.head = this.head.next;
+        }
+
+        public void RemoveLast()
+        {
+            if(this.IsEmpty())
+                throw new NullReferenceException("This List is currently Empty!");
+            Node<T> tail = this.GetTail();
+            tail.prev.next = null;
+        }
         public void RemoveNodeByValue(T val)
         {
-            if(head == null)
+            if(this.IsEmpty())
                 throw new NullReferenceException("Current list is empty!");
             Node<T> current = head;
             while(current != null)
@@ -102,6 +127,42 @@ namespace DoublyLinkedList
             }
         }
 
+        public bool Contains(T val)
+        {
+            if(this.head == null)
+                return false;
 
+            Node<T> current = head;
+            while(current != null)
+            {
+                if(current.data.Equals(val))
+                    return true;
+                current = current.next;
+            }
+            return false;
+        }
+
+        internal bool IsEmpty()
+        {
+            return this.size == 0;
+        }
+        public int Count()
+        {
+            return this.size;
+        }
+
+        //Used to allow list to be
+        // traversed like typical collections
+        public IEnumerator GetEnumerator()
+        {   
+            current = head;
+            
+            while(current != null)
+            {
+                yield return current.data;
+                current = current.next;
+            }
+        }
+    
     }
 }
