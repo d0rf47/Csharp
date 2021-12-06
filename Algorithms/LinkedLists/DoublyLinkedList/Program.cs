@@ -27,7 +27,7 @@ namespace DoublyLinkedList
             Console.WriteLine(dList.Contains("0"));
             dList.RemoveLast();
             Console.WriteLine(dList.Contains("9"));
-
+            dList.RemoveNodeAtPos(2);
             foreach(string i in dList)
             {
                 Console.WriteLine(i);

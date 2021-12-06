@@ -101,6 +101,7 @@ namespace DoublyLinkedList
             if(this.IsEmpty())
                 throw new NullReferenceException("This List is currently Empty!");
             this.head = this.head.next;
+            this.size--;
         }
 
         public void RemoveLast()
@@ -109,6 +110,7 @@ namespace DoublyLinkedList
                 throw new NullReferenceException("This List is currently Empty!");
             Node<T> tail = this.GetTail();
             tail.prev.next = null;
+            this.size--;
         }
         public void RemoveNodeByValue(T val)
         {
@@ -118,9 +120,41 @@ namespace DoublyLinkedList
             while(current != null)
             {
                 if(current.data.Equals(val))
-                {
+                {                    
                     current.next.prev = current.prev;
                     current.prev.next = current.next;
+                    this.size--;
+                    return;
+                }
+                current = current.next;
+            }            
+        }
+
+        /**
+        *   Uses sub 0 indexing
+        *   removes node from nth Position in list
+        */
+        public void RemoveNodeAtPos(int position)
+        {
+            //check for pos > than list size
+            if(position > this.size)
+                throw new OutOfMemoryException("Position is greater than list size!");     
+            //special case check to ensure integrity for iterator       
+            if(position == 0)
+            {
+                head = head.next;
+                this.size--;
+                return;
+            }
+            Node<T> current = head;
+            for(int i = 0; i <= position; i++)
+            {
+                if(i == position)
+                {
+                    // Console.WriteLine($"Removing {current.data}");
+                    current.next.prev = current.prev;       
+                    current.prev.next = current.next;     
+                    this.size--;                                                        
                     return;
                 }
                 current = current.next;
