@@ -144,27 +144,28 @@ namespace DoublyLinkedList
         {
             //check for pos > than list size
             if(position > this.size)
-                throw new OutOfMemoryException("Position is greater than list size!");     
-            //special case check to ensure integrity for iterator       
-            if(position == 0)
-            {
-                head = head.next;
-                this.size--;
-                return;
-            }
+                throw new OutOfMemoryException("Position is greater than list size!");                 
             Node<T> current = head;
             for(int i = 0; i <= position; i++)
             {
                 if(i == position)
                 {
-                    // Console.WriteLine($"Removing {current.data}");
-                    current.next.prev = current.prev;       
+
+                    Console.WriteLine($"Removing {current.data}");
+                    if(position != size - 1 )
+                        current.next.prev = current.prev;       
                     current.prev.next = current.next;     
                     this.size--;                                                        
-                    return;
+                    break;
                 }
                 current = current.next;
             }
+            //special case check to ensure integrity for iterator       
+            if(position == 0)            
+                head = head.next;                            
+            if(position == size - 1)            
+                tail = tail.prev;
+                            
         }
 
         public bool Contains(T val)
