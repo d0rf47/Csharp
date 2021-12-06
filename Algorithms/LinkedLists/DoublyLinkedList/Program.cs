@@ -32,6 +32,7 @@ namespace DoublyLinkedList
             {
                 Console.WriteLine(i);
             }
+            Console.WriteLine(dList.GetHead().data);
         }
     }
 }
