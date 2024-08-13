@@ -3,3 +3,4 @@
 **/obj/*
 
 *.csproj
+/.vs/slnx.sqlite
