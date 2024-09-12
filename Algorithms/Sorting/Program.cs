@@ -80,6 +80,8 @@ namespace Sorting
             }
 
             return Program.swapHelper(returnArr, swapCnt);
+
+            //try swaping min and max and re iterate list
         }
         static int minimumSwaps(int[] arr) {
             return swapHelper(arr, 0);
