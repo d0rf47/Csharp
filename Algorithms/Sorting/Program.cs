@@ -18,9 +18,9 @@ namespace Sorting
                 bool swapped = false;  
                 for(int j = 0; j < arr.Length - i - 1; j++){
                     if(arr[j] > arr[j + 1]){
-                        int t1 = arr[j];                        
+                        int temp = arr[j];                        
                         arr[j] = arr[j + 1];
-                        arr[j + 1]= t1;               
+                        arr[j + 1]= temp;               
                         swapped = true;     
                     }                    
                 }
@@ -30,69 +30,97 @@ namespace Sorting
             foreach(var i in arr) Console.WriteLine(i);
             return 0;
         }
+        
+        /// <summary>
+        /// Basic Selection Sort Algo
+        /// sorts in place by finding the lowest value
+        /// and adding it to the end of the sorted section
+        /// swapping the first out of place item after the
+        /// sorted section
+        /// O(n^2) time complexity
+        /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
+        public static int SelectionSort(int[] arr){
+            int swaps = 0;
+            int len = arr.Length;
+            int min;
 
-        static int swapHelper(int[] arr, int swapCnt){
-            //Console.WriteLine($"arr len {arr.Length}");
-            if(arr.Length < 2)
-                return swapCnt;         
-                foreach(var i in arr) Console.Write($"{i}, ");
-            Console.WriteLine();
-            var arr2 = arr[..];
-            int min = 2147483647;
-            int max = 1;
-            int minPos = 0;
-            int maxPos = 0;            
-            for(int i = 0; i < arr.Length; i++){                              
-                if(arr[i] <= min){
-                    min = arr[i];
-                    minPos = i;
+            for(int i = 0; i < len - 1; i++){
+                min = i;
+                for(int j = i + 1; j < len;j++){
+                    if(arr[j] < arr[min])
+                        min = j;
                 }
-                if(arr[i] >= max ){
-                    max = arr[i];
-                    maxPos = i;
+                
+                if(min != i){
+                    int temp = arr[min];
+                    arr[min] = arr[i];
+                    arr[i] = temp;
+                    swaps++;
                 }
             }
-            // Console.WriteLine(minPos);                        
-            // Console.WriteLine(maxPos);
-            if(arr2[0] != arr[minPos]){                
-                arr2[0] = arr[minPos];                
-                arr2[1] = arr[0];
-                swapCnt++;
-            }
-            if(arr2[arr.Length - 1] != arr[maxPos]){                
-                arr2[arr.Length - 1] = arr[maxPos];           
-                arr2[arr.Length - 2] = arr[arr.Length - 1];     
-                swapCnt++;
-            }
-            foreach(var i in arr2) Console.Write($"{i}, ");
-            Console.WriteLine();
-            int[] returnArr = new int[arr2.Length - 2];
-            for(int i = 0; i < arr2.Length - 2;  i++){
-                returnArr[i] = arr2[i+1];
-            }
-            // foreach(var i in returnArr) Console.Write($"{i}, ");
-            // Console.WriteLine();
-
-            if(returnArr.Length == 3)
-            {
-                if(returnArr[0] < arr2[0] || returnArr[0] > arr2[2])
-                    swapCnt++;
-            }
-
-            return Program.swapHelper(returnArr, swapCnt);
-
-            //try swaping min and max and re iterate list
+            return swaps;
         }
+
+        /// <summary>
+        /// cycle decomposition method
+        /// relies on representation of the input array
+        /// as disjoint cycles where each cycle represents
+        /// a sequence of elements that need to be swapped 
+        /// the length of said cycle provides the number of 
+        /// swaps required.
+        /// required a presort of KV pairs of value/index
+        /// and tracking which positions of the array
+        /// have already been visited & therefore sorted.
+        /// 
+        /// O(n log n) time complexity
+        /// /// </summary>
+        /// <param name="arr"></param>
+        /// <returns></returns>
         static int minimumSwaps(int[] arr) {
-            return swapHelper(arr, 0);
+
+            int swaps = 0;
+            int len = arr.Length;
+            //track which items are visited and sorted
+            bool[] visited = new bool[len];
+            //pair the array values with their index & sort by value
+            var ValIndex = arr.Select((value, index) => new {value, index})
+                            .OrderBy(vi => vi.value)
+                            .ToArray();
+
+            //traverse the array
+            for(int i = 0; i < len; i++)
+            {
+                if(visited[i] || ValIndex[i].index == i){
+                    // item is sorted or been checked skip
+                    continue;
+                }
+
+                int cycleSize = 0;
+                int j = i;
+                //start from unvisited item and count cycles
+                while (!visited[j])
+                {
+                    visited[j] = true;           
+                    //move to next item in cycle so we dont go in order we get the next index 
+                    //based on what the order should be         
+                    j = ValIndex[j].index;
+                    cycleSize++;
+                }
+                if(cycleSize > 1)
+                    swaps += cycleSize - 1;
+            }
+            return swaps;
         }
 
         public static void Main(string[] args){
             // int[] arr = [7, 12, 9, 11, 3];            
             // Program.BubbleSort(arr);      
+            int[] arr1 = [4,3,1,2];
             int[] arr2 = [2,3,4,1,5];
             int[] arr3 = [1, 3, 5, 2, 4, 6, 7];
-            int i = Program.minimumSwaps(arr3);
+            int i = Program.SelectionSort(arr1);
             Console.WriteLine(i);
         }
     }
