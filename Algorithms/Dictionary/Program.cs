@@ -31,9 +31,9 @@ class Program {
 
         Console.WriteLine("Yes");
     }
+
     public static void checkMagazine(List<string> magazine, List<string> note)
-    {
-        note.Sort();
+    {        
         Dictionary<int, string> dic = new();
         for(int i = 0; i < note.Count; i++)
         {
