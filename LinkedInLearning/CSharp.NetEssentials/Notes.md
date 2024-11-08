@@ -204,3 +204,21 @@ class StringTest
 
 #### Built-in Reference Types
 **Object**: 
+
+
+## Memory Management
+- .NET uses a _Managed Memory Model_
+    - the CLR (Common Language Runtime) manages memory allocation & deallocation
+    - this is known as **_Garbage Collection_** (GC)
+    - The GC is part of `System` and found in `System.GC`
+    - when new objects are created the CLR allocates the memory for said object on the heap.
+    - Heap: Is an area of system memory reserved for the application and kept separate from other programs to keep each programs memory safe from each other. 
+    - As long as memory is available the GC will allocate memory as needed, but as free space runs out it will determine what can be safely deallocated and remove said objects from memory to free up space.
+    - memory is considered in use as long as objects/variables remain in scope.
+    - the GC Can be explicitly called to perform clean up, but is rarely every required to be done this way since the process is mostly automatic and highly optimized
+- Exceptions
+    - 
+### Memory States
+1. Free: block of memory is free with no references and available for allocation
+1. Reserved: The block is available for use by the application but protected from other applications to use. However it cannot be used for storage until the block is committed 
+1. Committed: The block has been assigned to physical storage
