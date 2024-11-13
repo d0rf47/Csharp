@@ -2,10 +2,12 @@
 using System;
 using System.Text;
 
-// Write your answer here, and then test your code.
-// Don't change the structure of the Answer class.
+
 namespace Falconi.Csharp.NetEssentials
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Answer {        
 
         /// <summary>
@@ -136,7 +138,7 @@ namespace Falconi.Csharp.NetEssentials
             // This is how your code will be called.
             // You can edit this code to try different testing cases.
             string[] test_strs = new string[] {"Join", "these", "strings", "together"};
-            DateTime test_date = new DateTime(2030, 4, 1);
+            DateTime test_date = new DateTime(2035, 11, 29);
 
             string learnerResult1 = Answer.FormatDateTime(test_date);
             string learnerResult2 = Answer.FormatJoinStrings(test_strs);
