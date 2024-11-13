@@ -33,14 +33,14 @@ namespace Falconi.Csharp.NetEssentials
             StringBuilder sb = new();
             for(int i = 0; i < strs.Length; i++)
             {
-                sb.Append(strs[i].ToUpper());
+                sb.Append(strs[i]);
                 if(i < strs.Length - 1)
                 {
                     sb.Append('.');
                 }
 
             }
-            return sb.ToString();
+            return sb.ToString().ToUpper();
         }
     }
 
