@@ -1,3 +1,22 @@
+# Features of .NET Core 
+
+## Memory Management
+- .NET uses a _Managed Memory Model_
+    - the CLR (Common Language Runtime) manages memory allocation & deallocation
+    - this is known as **_Garbage Collection_** (GC)
+    - The GC is part of `System` and found in `System.GC`
+    - when new objects are created the CLR allocates the memory for said object on the heap.
+    - Heap: Is an area of system memory reserved for the application and kept separate from other programs to keep each programs memory safe from each other. 
+    - As long as memory is available the GC will allocate memory as needed, but as free space runs out it will determine what can be safely de-allocated and remove said objects from memory to free up space.
+    - memory is considered in use as long as objects/variables remain in scope.
+    - the GC Can be explicitly called to perform clean up, but is rarely every required to be done this way since the process is mostly automatic and highly optimized
+- Exceptions
+    - 
+### Memory States
+1. Free: block of memory is free with no references and available for allocation
+1. Reserved: The block is available for use by the application but protected from other applications to use. However it cannot be used for storage until the block is committed 
+1. Committed: The block has been assigned to physical storage
+
 # Data Types
 ## Reference Vs. Value
 
@@ -203,22 +222,117 @@ class StringTest
     - Object, String, Delegate, Dynamic
 
 #### Built-in Reference Types
-**Object**: 
+##### Object
+- Is a built-in alias for `System.Object`
+- All types in the .net ecosystem (including value types) inherit directly or indirectly from `System.Object`
+- `Object` can be assigned values of any type since technically all types in .net are objects
+- **Boxing**: Is the term used when a value type variable is converted to an object 
+    - Boxing is performed by casting _implicitly_
+    - eg.  
+```
+        int i = 123;
+        object o = i; // boxing occurs here
+```
+- **Unboxing**: Is the term used to convert a value type variable stored as an object back into a value type.
+    - is performed by casting _explicitly_
+    - requires checking the object instance matches the requested unboxed type
+    - eg.
+```
+    o = 123;
+    i = (int)o;  // unboxing 
+```
+- when the CLR boxes a value type it is wrapping the value inside an `Object` instance and thus stores the variable on the managed heap.
+- Boxing is computationally expensive since new objects must be created in memory to be used
+- unboxing can result in 2 common exceptions
+    1. `NullReferenceException` - when a null value is attempted to be unboxed
+    1. `InvalidCastException` - when an incompatible reference type is used
 
 
-## Memory Management
-- .NET uses a _Managed Memory Model_
-    - the CLR (Common Language Runtime) manages memory allocation & deallocation
-    - this is known as **_Garbage Collection_** (GC)
-    - The GC is part of `System` and found in `System.GC`
-    - when new objects are created the CLR allocates the memory for said object on the heap.
-    - Heap: Is an area of system memory reserved for the application and kept separate from other programs to keep each programs memory safe from each other. 
-    - As long as memory is available the GC will allocate memory as needed, but as free space runs out it will determine what can be safely deallocated and remove said objects from memory to free up space.
-    - memory is considered in use as long as objects/variables remain in scope.
-    - the GC Can be explicitly called to perform clean up, but is rarely every required to be done this way since the process is mostly automatic and highly optimized
-- Exceptions
-    - 
-### Memory States
-1. Free: block of memory is free with no references and available for allocation
-1. Reserved: The block is available for use by the application but protected from other applications to use. However it cannot be used for storage until the block is committed 
-1. Committed: The block has been assigned to physical storage
+
+##### String
+- Is an alias for `System.String`
+- Is a sequence of zero or more unicode Characters
+- despite being a reference type, equality operators `==` & `!=` perform a value based check to allow for a more intuitive use
+- String objects are _immutable_ meaning when changing the content of a String object, a new object is actually created in memory and the previously held memory is made available
+- `[ ]` operator can be used for readonly access to individual characters in a string
+- Include some built-in properties and methods
+    - Length - property that tracks the number of characters in the string
+    - Join() - used to join strings with a specified delimiter
+        - arg1 is the delimiter 
+        - arg2 is a collection type (array, list etc.)
+    - Concat() - used to combine strings together without any delimiter
+    - Compare(s1,s2);
+        - performs an ordinal comparison and returns and int
+        - used to facilitate sorting on strings
+        - < 0 means s1 comes before s2
+        - == 0 means they are the same position
+        - \> 0 means s1 comes after s2
+    - Replace("wordtofind", "replacement") - replaces s1 with s2 if found and returns a new string object
+
+- **String Literals**
+    - are a type of String and can be written in 3 formats
+    - are enclosed in a minimum of 3 double quotes 
+    - eg.
+```
+    """
+    This is a multi-line
+    string literal with the second line indented.
+    """
+```
+```
+    var message = """
+    "This is a very important message."
+    """;
+    Console.WriteLine(message);
+    // output: "This is a very important message."
+```
+- **Interpolation**
+    - There are 2 methods of inserting data into strings
+        1. Placeholder method: `Console.WriteLine("Hello, {0}! Today is {1}, it's {2:HH:mm} now.", name, date.DayOfWeek, date);`
+        1. Interpolation method: `Console.WriteLine($"Hello, {name}! Today is {date.DayOfWeek}, it's {date:HH:mm} now.");`
+    - Formatting: `{<interpolationExpression>[,<alignment>][:<formatString>]}`
+- **Concatenation**
+    - is the process of combining 2 or more strings 
+    - `String.Concat(args)`
+    -  `String.Join('char', strings);
+    - eg.    
+```
+        string [] strings = {"one", "two", "three"};
+		string outString = String.Concat(strings);
+		Console.WriteLine(outString);   // output: onetwothree
+		outString = String.Join('.', strings);
+		Console.WriteLine(outString);   // output: one.two.three
+		outString = String.Join("---", strings);
+		Console.WriteLine(outString);   // output: one---two---three
+```
+- **Searching**
+    - `Contains("string")` - used to determine if a string contains specified content
+        - By default it is _case sensitive_ but this can be overridden using additional parameters
+    - eg.
+```
+    string testString = "The quick brown Fox jumps over the lazy Dog";
+    Console.WriteLine($"{testString.Contains("fox")}")   // output: False
+    Console.WriteLine($"{testString.Contains("fox"), StringComparison.CurrentCultureIgnoreCase}")   // output: True
+```
+- `StartsWith(s1)` - used to check if a string begins with the specified argument
+- `EndsWith(s1)` - used to check if a string ends with the specified argument
+- `IndexOf(s1)` - returns an int showing the starting position of the specified string
+- `LastIndexOf(s1)` - returns an int showing the starting position of the specified string, but finds the last instance of the string to search for and searches from the end of the string
+    - both indexOf methods return -1 if no match is found
+
+- **Determining Whitespace** 
+- `String.IsNullOrEmpty()`;
+- `String.IsNullOrWhiteSpace()`;
+
+**Parsing Numbers**
+- involves converting numeric strings into their appropriate numeric value type
+- `Parse()` methods are available on all numeric types
+- `Parse()` methods will throw an exception `FormatException` if an incompatible numeric string is provided as the argument
+- `TryParse()` returns a bool and prevents format exception errors. It performs the parse on the `out` parameter and handles the exception internally
+    - `public static bool TryParse (string? s, IFormatProvider? provider, out int result);`
+
+**Formatting Numerical Data**
+- `$"{var, [alignment]:[format][precision]}"`
+list of types
+B,b - binary String
+C,c - Currency

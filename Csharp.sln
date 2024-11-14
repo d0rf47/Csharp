@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LinkedInLearning", "LinkedInLearning", "{B352A5A2-2711-428B-9472-C23106A3C361}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CSharp.NetEssentials", "CSharp.NetEssentials", "{84725A51-EB41-455F-88B2-0C9C23A4188C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strings", "LinkedInLearning\CSharp.NetEssentials\Strings\Strings.csproj", "{60824158-D2E1-4294-8E0F-44B7BD9A2EDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60824158-D2E1-4294-8E0F-44B7BD9A2EDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60824158-D2E1-4294-8E0F-44B7BD9A2EDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60824158-D2E1-4294-8E0F-44B7BD9A2EDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60824158-D2E1-4294-8E0F-44B7BD9A2EDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84725A51-EB41-455F-88B2-0C9C23A4188C} = {B352A5A2-2711-428B-9472-C23106A3C361}
+		{60824158-D2E1-4294-8E0F-44B7BD9A2EDE} = {84725A51-EB41-455F-88B2-0C9C23A4188C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B968235E-92A0-4738-A636-6C42D90012E1}
+	EndGlobalSection
+EndGlobal
