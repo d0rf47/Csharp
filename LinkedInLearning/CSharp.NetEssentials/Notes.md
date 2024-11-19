@@ -333,6 +333,128 @@ class StringTest
 
 **Formatting Numerical Data**
 - `$"{var, [alignment]:[format][precision]}"`
-list of types
-B,b - binary String
-C,c - Currency
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:x="urn:schemas-microsoft-com:office:excel"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+
+<meta name=ProgId content=Excel.Sheet>
+<meta name=Generator content="Microsoft Excel 15">
+<link id=Main-File rel=Main-File
+href="file:///C:/Users/falcomic/AppData/Local/Temp/msohtmlclip1/01/clip.htm">
+<link rel=File-List
+href="file:///C:/Users/falcomic/AppData/Local/Temp/msohtmlclip1/01/clip_filelist.xml">
+<style>
+	{mso-displayed-decimal-separator:"\.";
+	mso-displayed-thousand-separator:"\,";}
+@page
+	{margin:.75in .7in .75in .7in;
+	mso-header-margin:.3in;
+	mso-footer-margin:.3in;}
+tr
+	{mso-height-source:auto;}
+col
+	{mso-width-source:auto;}
+br
+	{mso-data-placement:same-cell;}
+td
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	mso-ignore:padding;
+	color:black;
+	font-size:11.0pt;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Aptos Narrow", sans-serif;
+	mso-font-charset:0;
+	mso-number-format:General;
+	text-align:general;
+	vertical-align:bottom;
+	border:none;
+	mso-background-source:auto;
+	mso-pattern:auto;
+	mso-protection:locked visible;
+	white-space:nowrap;
+	mso-rotate:0;}
+.xl63
+	{mso-number-format:"\0022$\0022\#\,\#\#0\.00_\)\;\[Red\]\\\(\0022$\0022\#\,\#\#0\.00\\\)";}
+.xl64
+	{mso-number-format:Scientific;}
+.xl65
+	{mso-number-format:Standard;}
+</style>
+</head>
+
+<body link="#467886" vlink="#96607D">
+
+Format Specifier | Name | Example | Precision Example | Supports
+-- | -- | -- | -- | --
+B, b | Binary | 42("B") = 101010 | 255("b16") = 0000000011111111 | Int
+C, c | Currency | 123.456 ("C", en-US) = $123.46 | -123.456 ("C3", fr-FR) = -123,456   € | All numerics
+D, d | Decimal | 1234   ("D") | -1234   ("D6") = -001234 | Int
+E, e | Exponential | 1052.0329112756 ("E", en-US) = 1.052033E+003 | -1052.0329112756 ("e2", en-US) =   -1.05e+003 | All numerics
+F, f | Fixed-point | 1234.567 ("F", en-US) = 1234.57 | 1234 ("F1", en-US) = 1234.0 | All numerics
+G, g | General | -123.456 ("G", en-US) = -123.456 | 123.4546 ("G4", en-US) = 123.5 | All numerics
+N, n | Number | 1234.567 ("N", en-US) = 1,234.57 | 1234   ("N1", en-US) = 1,234.0 | All numerics
+P, p | Percent | 1 ("P", en-US) = 100.00% | -0.39678   ("P1", en-US) = -39.7% | All numerics
+R, r | Round-trip | 123456789.12345678 ("R") = 123456789.12345678 | `-1234567890.12345678 ("R") = -1234567890.1234567 | Singe, Double, Big Int
+X,   x | Hexadecimal | 255   ("X") = 55 | 255   ("x4") = 00ff | Int
+</body>
+</html>
+
+- Examples
+```
+    int dec = 1234;
+    int[] quarters = {1,2,3,4};
+    double[] decimals = {.123, .456, .789};
+    int[] sales = {10000, 15000, 20000,25000};
+    Console.WriteLine($"{dec.ToString("D12")} {dec.ToString("d")}");    // output: 000000001234 1234
+    Console.WriteLine($"{quarters[0], 12}");                            // output:            1
+    Console.WriteLine($"{sales[0], 12:C0}");                            // output:      $10,000
+    Console.WriteLine($"{decimals[0], 12:P0} {decimals[1], 12:P2}");    // output:         12 %      45.60 %
+```
+
+- **Date-Time Conversion**
+    - `DateTime` Struct is the basic Type used for dealing with Date or Times in C#
+    - It includes a series of built-in functions used for parsing, processing and comparing dates/times
+    - `DateOnly` is used when only the Date is required
+    - `TimeOnly` is used when only the time is required
+    - `TimeSpan` is used to represent a duration of time and is returned when operations are performed on `DateTime` variables
+examples:
+```
+var today = DateTime.Now;
+DateOnly todayDate = DateOnly.FromDateTime(today);
+TimeOnly todayTime = TimeOnly.FromDateTime(today);
+DateTime AprilFools = new(today.Year, 4, 1);    // Format is yyyy, mm, dd
+DateTime NewYearsDay = new(today.Year, 1, 1);
+Console.WriteLine($"It currently is {today.ToString()}");
+Console.WriteLine($"It currently is {today:F}");
+Console.WriteLine($"It currently is {today:d}");
+Console.WriteLine($"It currently is {today:D}");
+Console.WriteLine($"It currently is {todayDate.ToString()}");
+Console.WriteLine($"It currently is {todayTime.ToString()}");
+
+today = today.AddDays(9);
+Console.WriteLine($"It will be {today.ToString()}");
+
+today = today.AddMonths(9);
+Console.WriteLine($"It will be {today.ToString()}");
+
+TimeSpan interval = AprilFools - NewYearsDay;
+Console.WriteLine($"Difference btwn April Fools & New Years Day: {interval}");
+
+output:
+It currently is 11/19/2024 3:38:27 PM
+It currently is Tuesday, November 19, 2024 3:38:27 PM
+It currently is 11/19/2024
+It currently is Tuesday, November 19, 2024
+It currently is 11/19/2024
+It currently is 3:38 PM
+It will be 11/28/2024 3:38:27 PM
+It will be 8/28/2025 3:38:27 PM
+Difference btwn April Fools & New Years Day: 91.00:00:00
+```
