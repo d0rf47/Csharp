@@ -6,9 +6,10 @@ using System.Text;
 namespace Falconi.Csharp.NetEssentials
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
-    public class Answer {        
+    public class Answer
+    {
 
         /// <summary>
         /// alt method (more efficient)
@@ -16,9 +17,10 @@ namespace Falconi.Csharp.NetEssentials
         /// </summary>
         /// <param name="the_date"></param>
         /// <returns></returns>
-        public static string FormatDateTime(DateTime the_date) {
+        public static string FormatDateTime(DateTime the_date)
+        {
             // Your code goes here
-            string pattern = @"yyyy--M--d";            
+            string pattern = @"yyyy--M--d";
             return the_date.ToString(pattern);
         }
 
@@ -28,13 +30,14 @@ namespace Falconi.Csharp.NetEssentials
         /// </summary>
         /// <param name="strs"></param>
         /// <returns></returns>
-        public static string FormatJoinStrings(string[] strs) {
+        public static string FormatJoinStrings(string[] strs)
+        {
             // Your code goes here
             StringBuilder sb = new();
-            for(int i = 0; i < strs.Length; i++)
+            for (int i = 0; i < strs.Length; i++)
             {
                 sb.Append(strs[i]);
-                if(i < strs.Length - 1)
+                if (i < strs.Length - 1)
                 {
                     sb.Append('.');
                 }
@@ -49,7 +52,7 @@ namespace Falconi.Csharp.NetEssentials
     /// Ex 1.
     /// From Geminai
     /// Let's compare the two methods in terms of their BigO complexity:
-    /// 
+    ///
     /// Method 1: String.Join(".", strs).ToUpper()
     /// String.Join(".", strs) concatenates the strings with a period separator. This operation is O(n) where n is the total length of all strings combined.
     /// .ToUpper() converts the entire resulting string to uppercase, which is also O(n) since it processes each character once.
@@ -137,7 +140,7 @@ namespace Falconi.Csharp.NetEssentials
         {
             // This is how your code will be called.
             // You can edit this code to try different testing cases.
-            string[] test_strs = new string[] {"Join", "these", "strings", "together"};
+            string[] test_strs = new string[] { "Join", "these", "strings", "together" };
             DateTime test_date = new DateTime(2035, 11, 29);
 
             string learnerResult1 = Answer.FormatDateTime(test_date);

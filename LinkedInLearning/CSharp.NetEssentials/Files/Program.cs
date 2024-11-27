@@ -5,7 +5,7 @@ string userInput = string.Empty;
 if(File.Exists(fileName))
 {    
     File.WriteAllText(fileName, "The file has been overwritten");
-    File.AppendAllText(fileName, Environment.NewLine + "This has been appended");
+    File.AppendAllText(fileName, Environment.NewLine + "This has been appended");    
 }
 else
 {

@@ -463,6 +463,7 @@ Difference btwn April Fools & New Years Day: 91.00:00:00
 - The primary class used for accessing File methods is defined in `System.IO.File` in the `File Class`
 - This class provides a series of static methods we can use to work with various file types in C#
 - typical operations include: Copying, moving, renaming, creating, opening, deleting, and appending to a single file.
+- Files also contain meta-data which can be used. They can be accessed, read and written to and include data such as author, last edit, creation timestamp, hidden or not etc. 
 
 ## CreateText
 - Is used to create basic Text files.
@@ -525,7 +526,24 @@ else
 }
 
 ```
+## SetAttributes / GetAttributes
+- Provides access to set/get File meta data
 
+## FileInfo Objects
+- Provides access to all of a File's properties in a single object
+
+## Directories
+- Are a structuring mechanism used to organize files 
+- Many of the methods used to interact with directories are shared with Files with the exception being the methods are found in the `Directory` Class instead of File
+Examples
+```
+string currentPath = Directory.GetCurrentDirectory();
+List<string> directories = new(Directory.EnumerateDirectories(currentPath));
+
+directories.ForEach(d => Console.WriteLine(d));
+
+Console.WriteLine($"PWD = {currentPath}");
+```
 
 
 

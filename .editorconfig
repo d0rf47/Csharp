@@ -1,0 +1,29 @@
+# Top-most EditorConfig file
+root = true
+
+# C# files
+[*.cs]
+# Use spaces instead of tabs
+indent_style = space
+# Set the number of spaces per indentation level
+indent_size = 4
+# Ensure that C# code uses 4 spaces per indentation level
+tab_width = 4
+
+# End of line preferences (common for cross-platform consistency)
+end_of_line = lf
+
+# Trim trailing whitespace at the end of lines
+trim_trailing_whitespace = true
+
+# Insert a new line at the end of files if it's missing
+insert_final_newline = true
+
+# Formatting for C# code
+csharp_style_namespace_declarations = block_scoped
+
+# Keep code readable, setting maximum line length
+max_line_length = 120
+
+# Enable formatting rules for braces
+csharp_brace_style = next_line
