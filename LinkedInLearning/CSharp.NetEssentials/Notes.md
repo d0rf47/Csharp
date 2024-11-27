@@ -249,7 +249,7 @@ class StringTest
 
 
 
-##### String
+##### Strings
 - Is an alias for `System.String`
 - Is a sequence of zero or more unicode Characters
 - despite being a reference type, equality operators `==` & `!=` perform a value based check to allow for a more intuitive use
@@ -458,3 +458,78 @@ It will be 11/28/2024 3:38:27 PM
 It will be 8/28/2025 3:38:27 PM
 Difference btwn April Fools & New Years Day: 91.00:00:00
 ```
+
+# Working with Files
+- The primary class used for accessing File methods is defined in `System.IO.File` in the `File Class`
+- This class provides a series of static methods we can use to work with various file types in C#
+- typical operations include: Copying, moving, renaming, creating, opening, deleting, and appending to a single file.
+
+## CreateText
+- Is used to create basic Text files.
+- this method will always overwrite data that exists in the file if it already exists. 
+    - It can be useful to check if a file exists first before using the Create methods to ensure data integrity.
+Example
+```
+const string fileName = "TestFile.txt";
+
+using(StreamWriter sw = File.CreateText(fileName))
+{
+    sw.WriteLine("This is a text file");
+}
+```
+## WriteAllText
+- Is used to write to a File and will overwrite the contents of the file
+- Creates the File if doesn't exist
+example
+`File.WriteAllText(fileName, "The file has been overwritten");`
+
+## Delete
+- Used to remove a file
+- Can throw and exception if file is not accessible for use or does not exist
+
+Example combining the various methods usable on Files via the File Class
+```
+const string fileName = "TestFile.txt";
+string readFileData = string.Empty;
+string userInput = string.Empty;
+
+if(File.Exists(fileName))
+{    
+    File.WriteAllText(fileName, "The file has been overwritten");
+    File.AppendAllText(fileName, Environment.NewLine + "This has been appended");
+}
+else
+{
+    using(StreamWriter sw = File.CreateText(fileName))
+    {
+        sw.WriteLine("This is a text file!");        
+    }
+     
+}
+
+readFileData = File.ReadAllText(fileName);
+Console.WriteLine(readFileData);
+Console.WriteLine("Do you want to remove the file? Yes/No");
+
+userInput = Console.ReadLine();
+if(userInput.ToLower() == "yes" || userInput.ToLower() == "y")
+{
+    File.Delete(fileName);
+    Console.Clear();
+    Console.WriteLine("File Deleted!");
+}
+else
+{
+    Console.Clear();
+    Console.WriteLine("Goodbye World");
+}
+
+```
+
+
+
+
+**Using Statement**:
+- Is a keyword used to define a scope of use for a resource which will get disposed of once the program has excited with `Using` scope. 
+- It is used to ensure proper disposal of object instances that are not automatically handled by the .net Garbage Collector.
+- `using` syntax ensure we do not leave object references open which are not longer needed.
