@@ -27,3 +27,10 @@ max_line_length = 120
 
 # Enable formatting rules for braces
 csharp_brace_style = next_line
+
+# Ensure that semicolons are placed after control statements and expression-bodied members
+csharp_style_expression_bodied_methods = true:suggestion
+csharp_style_expression_bodied_properties = true:suggestion
+# This rule makes sure there are no missing semicolons for expression-bodied members
+csharp_new_line_before_members = true:suggestion
+csharp_style_expression_bodied_properties = true:suggestion

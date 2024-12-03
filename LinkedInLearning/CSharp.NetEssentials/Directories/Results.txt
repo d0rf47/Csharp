@@ -1,0 +1,10 @@
+~~~~ Results ~~~~
+Total Files: 12
+.docx File Count: 5
+.xlsx File Count: 4
+.pptx File Count: 3
+~~~~ ---- ~~~~
+Total Size of Files: 2,674,311
+.docx : 1,196,567
+.xlsx : 74,262
+.pptx : 1,403,482
