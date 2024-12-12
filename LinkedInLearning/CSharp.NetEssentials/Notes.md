@@ -545,7 +545,12 @@ directories.ForEach(d => Console.WriteLine(d));
 Console.WriteLine($"PWD = {currentPath}");
 ```
 
-
+#### Regular Expressions (RegEx)
+- Defined in `System.Text.RegularExpressions` - This is not a in the default namespaces and must be explicitly imported
+- Used for pattern Matching in text.
+- It can also be used for text replacements 
+- .Net provides a standard library API that provides useful methods for utilizing Regular expressions.
+- 
 
 **Using Statement**:
 - Is a keyword used to define a scope of use for a resource which will get disposed of once the program has excited with `Using` scope. 
