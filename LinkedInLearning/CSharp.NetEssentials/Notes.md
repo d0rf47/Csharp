@@ -550,7 +550,13 @@ Console.WriteLine($"PWD = {currentPath}");
 - Used for pattern Matching in text.
 - It can also be used for text replacements 
 - .Net provides a standard library API that provides useful methods for utilizing Regular expressions.
-- 
+##### Drawbacks
+- Possible Performance Issues 
+    - Backtracking is an issue caused by poorly constructed RegEx's 
+    - it causes the RegEx processor to execute slowly
+    - Timeout values can be used to prevent this issue from becoming a performance bottleneck and affecting the application
+    
+- Security issues
 
 **Using Statement**:
 - Is a keyword used to define a scope of use for a resource which will get disposed of once the program has excited with `Using` scope. 
