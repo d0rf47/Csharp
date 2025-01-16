@@ -7,6 +7,40 @@
 - Design patterns in software allow us to recognize situations where a pattern belongs. It allows us to combine patterns in a way that produces the optimal solution to a problem.
 - Design Patterns also allow us to create code that can be easily recognized and understood by others
 
+## Object Oriented Programming (OOP)
+
+- Everything is some kind of object with a set lifetime
+- it is a structured organization of properties (class variables) and method (functions)
+- Important note is that OOP is really about how information is transferred and used throughout an application and how it is stored
+- OOP is a set of concepts about how & where data + Actions come together
+- It is an organizational strategy that makes it easier to build and maintain applications over time
+- Key Principals of OOP
+
+### Encapsulation
+
+- Keep information as local as possible. i.e Don't share what doesn't need to be shared.
+- This is where interfaces come into play. All class define an interface whether explicit or not. This is what is made available (the properties & method) outside of the class itself through access modifiers (public, private, protected)
+- Nothing that does not need to be exposed should be exposed (keep implementation details private)
+
+### Abstraction
+
+- Is based on layers of understanding. i.e we don't need to understand how machine code works to write a web application.
+  - In this sense the lower layers are abstracted away through API's and interfaces or Modern Languages and their features (like JS)
+
+### Inheritance
+
+- is the principal of being able to extend existing code without changing it.
+- this is the foundations of modern frameworks. We can start from more than 0 by building on what the framework provides
+- Sets the basis for Code reuse without having to change the code or causing breaking changes. This is foundational for most of the principals of modern development.
+
+### Polymorphism
+
+- Build on the foundation of inheritance
+- it allows derived objects to be used/treated as the type they are extending
+- C# Exceptions are the best example of this.
+  - All exceptions have a message which can be displayed.
+  - If one exception does not implement a message than code cannot treat **all** exceptions the same which causes problems
+
 ## Design Pattern Categories
 
 ### Creational Patterns
@@ -122,8 +156,15 @@
 
 #### Observer Pattern
 
-- Define how interactions are handled btwn Classes or Objects
-- Adapter, Iterator, Observer, Mediator
+- One to Many relationship that allows objects to subscribe to something and be notified upon changes
+- all events and event handling in C# utilize this pattern
+- The object being listened to does not need to know anything about its listeners
+
+#### State Pattern
+
+- Allows an object to change its behaviour based on its current state
+- reduces the objects state from the object itself
+- Reduces the need to change an object as additional logic is added over time
 
 ### Concurrency Patterns
 
@@ -154,37 +195,3 @@
     - The class is smartphone which composes all these types into a single class
   - **Abstract**: A type of class with some functionality defined but not all of it. But is not a complete class without another class that inherits from it and implements it
   - **Concrete**: Is a class that can be instantiated and used
-
-## Object Oriented Programming (OOP)
-
-- Everything is some kind of object with a set lifetime
-- it is a structured organization of properties (class variables) and method (functions)
-- Important note is that OOP is really about how information is transferred and used throughout an application and how it is stored
-- OOP is a set of concepts about how & where data + Actions come together
-- It is an organizational strategy that makes it easier to build and maintain applications over time
-- Key Principals of OOP
-
-### Encapsulation
-
-- Keep information as local as possible. i.e Don't share what doesn't need to be shared.
-- This is where interfaces come into play. All class define an interface whether explicit or not. This is what is made available (the properties & method) outside of the class itself through access modifiers (public, private, protected)
-- Nothing that does not need to be exposed should be exposed (keep implementation details private)
-
-### Abstraction
-
-- Is based on layers of understanding. i.e we don't need to understand how machine code works to write a web application.
-  - In this sense the lower layers are abstracted away through API's and interfaces or Modern Languages and their features (like JS)
-
-### Inheritance
-
-- is the principal of being able to extend existing code without changing it.
-- this is the foundations of modern frameworks. We can start from more than 0 by building on what the framework provides
-- Sets the basis for Code reuse without having to change the code or causing breaking changes. This is foundational for most of the principals of modern development.
-
-### Polymorphism
-
-- Build on the foundation of inheritance
-- it allows derived objects to be used/treated as the type they are extending
-- C# Exceptions are the best example of this.
-  - All exceptions have a message which can be displayed.
-  - If one exception does not implement a message than code cannot treat **all** exceptions the same which causes problems
